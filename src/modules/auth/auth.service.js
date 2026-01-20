@@ -66,4 +66,9 @@ export class AuthService {
 
         return user
     }
+
+    static async getUserByEmail(email) {
+        const user = await UserModel.findOne({ email }).lean().select("-password_hash")
+        return user
+    }
 }
