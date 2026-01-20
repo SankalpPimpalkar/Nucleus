@@ -1,6 +1,7 @@
 import { NotFoundError, UnauthorizedError } from "../../shared/errors/types.js";
 import ProjectModel from "./project.model.js";
 import OrganizationModel from "../organizations/organization.model.js";
+import eventBus from "../../shared/events/EventBus.js";
 
 export class ProjectService {
 
@@ -26,6 +27,8 @@ export class ProjectService {
             created_by: user,
             organization: orgId
         });
+
+        await eventBus.emit('project:created', { projectId: newProject.id })
 
         return newProject;
     }
@@ -88,6 +91,7 @@ export class ProjectService {
 
         this.#validateOrgOwner(user, project.organization);
 
+        eventBus.emit('project:deleted', { projectId })
         await ProjectModel.findByIdAndDelete(projectId);
 
         return true;
