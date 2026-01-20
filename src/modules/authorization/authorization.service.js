@@ -97,7 +97,7 @@ export class AuthorizationService {
         rolePermissions.permissions = permissions;
         await rolePermissions.save();
 
-        return rolePermissions
+        return await rolePermissions
             .populate("role", "name description")
             .populate("permissions", "key")
             .select("-project");
@@ -117,8 +117,8 @@ export class AuthorizationService {
     }
 
     static async deleteAllRoles(projectId) {
-        await RolePermissionModel.deleteMany({ projectId });
-        await RoleModel.deleteMany({ projectId });
+        await RolePermissionModel.deleteMany({ project: projectId });
+        await RoleModel.deleteMany({ project: projectId });
         return true;
     }
 }
