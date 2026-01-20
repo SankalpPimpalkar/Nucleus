@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser"
 import { errorHandler } from "./shared/errors/handler.js"
 import authRouter from "./modules/auth/auth.routes.js"
 import organizationRouter from "./modules/organizations/organization.routes.js"
+import projectRouter from "./modules/projects/project.routes.js"
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRouter)
 app.use('/api/organizations', organizationRouter)
+app.use('/api/projects', projectRouter)
 
 // Global Error Handler
 app.use(errorHandler)
