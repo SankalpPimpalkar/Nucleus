@@ -45,7 +45,7 @@ export class AuthController {
             .json({ message: 'Logged out successfully' });
     }
 
-    static async getMe(req, res) {
+    static async getMe(req, res, next) {
         try {
             const userId = req.user
             const user = await AuthService.getById(userId)
@@ -57,9 +57,9 @@ export class AuthController {
         }
     }
 
-    static async getUserByEmail(req, res) {
+    static async getUserByEmail(req, res, next) {
         try {
-            const { email } = req.body
+            const { email } = req.query
             const user = await AuthService.getUserByEmail(email)
             return res
                 .status(200)
