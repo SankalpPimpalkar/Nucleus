@@ -8,5 +8,6 @@ authRouter.post('/register', AuthController.register)
 authRouter.post('/login', AuthController.login)
 authRouter.delete('/logout', authenticate, AuthController.logout)
 authRouter.get('/me', authenticate, AuthController.getMe)
+authRouter.get('/', authenticate, AuthController.getUserByEmail)
 
 export default authRouter

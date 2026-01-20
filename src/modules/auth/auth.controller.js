@@ -56,4 +56,17 @@ export class AuthController {
             next(error)
         }
     }
+
+    static async getUserByEmail(req, res) {
+        try {
+            const { email } = req.body
+            const user = await AuthService.getUserByEmail(email)
+            return res
+                .status(200)
+                .json({ user })
+
+        } catch (error) {
+            next(error)
+        }
+    }
 }
