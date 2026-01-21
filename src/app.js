@@ -7,6 +7,7 @@ import authRouter from "./modules/auth/auth.routes.js"
 import organizationRouter from "./modules/organizations/organization.routes.js"
 import { apiReference } from '@scalar/express-api-reference'
 import "./modules/authorization/authorization.listener.js"
+import docRouter from "./modules/docs/docs.routes.js"
 
 const app = express()
 
@@ -19,15 +20,16 @@ app.use(cors())
 app.use(cookieParser())
 
 // Routes
-app.use(
-    '/',
-    apiReference({
-        url: '/public/nucleus.yaml',
-    }),
-)
-
+app.use("/docs", docRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/orgs', organizationRouter)
+
+app.use(
+    "/",
+    apiReference({
+        url: "/docs",
+    })
+)
 
 // Global Error Handler
 app.use(errorHandler)
