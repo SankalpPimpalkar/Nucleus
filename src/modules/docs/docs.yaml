@@ -1,10 +1,15 @@
 openapi: 3.0.0
+
 info:
   title: Nucleus API
   version: 1.0.0
+  description: Backend API for Nucleus (Auth, Orgs, Projects, RBAC)
 
 servers:
   - url: http://localhost:3000
+    description: Local development
+  - url: https://nucleus-sand.vercel.app
+    description: Production (Vercel)
 
 tags:
   - name: Auth
@@ -24,6 +29,10 @@ paths:
       responses:
         '200':
           description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
 
   /api/auth/login:
     post:
@@ -35,6 +44,10 @@ paths:
       responses:
         '200':
           description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
 
   /api/auth:
     delete:
@@ -58,7 +71,11 @@ paths:
             format: email
       responses:
         '200':
-          description: User fetched successfully
+          description: User fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
 
   /api/auth/me:
     get:
@@ -67,7 +84,11 @@ paths:
       operationId: getCurrentUser
       responses:
         '200':
-          description: Current user info
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
 
   /api/orgs:
     post:
@@ -79,6 +100,10 @@ paths:
       responses:
         '200':
           description: Organization created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
 
     get:
       tags: [Organizations]
@@ -87,22 +112,30 @@ paths:
       responses:
         '200':
           description: Organizations list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
 
   /api/orgs/{orgId}:
     get:
       tags: [Organizations]
-      summary: Get organization by ID
-      operationId: getOrganizationById
+      summary: Get organization
       parameters:
         - $ref: '#/components/parameters/orgId'
       responses:
         '200':
           description: Organization details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
 
     patch:
       tags: [Organizations]
       summary: Update organization name
-      operationId: updateOrganizationName
       parameters:
         - $ref: '#/components/parameters/orgId'
       requestBody:
@@ -114,7 +147,6 @@ paths:
     delete:
       tags: [Organizations]
       summary: Delete organization
-      operationId: deleteOrganization
       parameters:
         - $ref: '#/components/parameters/orgId'
       responses:
@@ -125,7 +157,6 @@ paths:
     post:
       tags: [Projects]
       summary: Create project
-      operationId: createProject
       parameters:
         - $ref: '#/components/parameters/orgId'
       requestBody:
@@ -133,33 +164,44 @@ paths:
       responses:
         '200':
           description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
 
     get:
       tags: [Projects]
       summary: Get projects
-      operationId: getProjects
       parameters:
         - $ref: '#/components/parameters/orgId'
       responses:
         '200':
           description: Projects list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
 
   /api/orgs/{orgId}/projects/{projectId}:
     get:
       tags: [Projects]
-      summary: Get project by ID
-      operationId: getProjectById
+      summary: Get project
       parameters:
         - $ref: '#/components/parameters/orgId'
         - $ref: '#/components/parameters/projectId'
       responses:
         '200':
           description: Project details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
 
     delete:
       tags: [Projects]
       summary: Delete project
-      operationId: deleteProject
       parameters:
         - $ref: '#/components/parameters/orgId'
         - $ref: '#/components/parameters/projectId'
@@ -171,7 +213,6 @@ paths:
     post:
       tags: [Members]
       summary: Add member
-      operationId: addMember
       parameters:
         - $ref: '#/components/parameters/orgId'
         - $ref: '#/components/parameters/projectId'
@@ -180,47 +221,47 @@ paths:
       responses:
         '200':
           description: Member added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
 
     get:
       tags: [Members]
       summary: Get members
-      operationId: getMembers
       parameters:
         - $ref: '#/components/parameters/orgId'
         - $ref: '#/components/parameters/projectId'
       responses:
         '200':
           description: Members list
-
-  /api/orgs/{orgId}/projects/{projectId}/members/{memberId}:
-    delete:
-      tags: [Members]
-      summary: Remove member
-      operationId: removeMember
-      parameters:
-        - $ref: '#/components/parameters/orgId'
-        - $ref: '#/components/parameters/projectId'
-        - $ref: '#/components/parameters/memberId'
-      responses:
-        '200':
-          description: Member removed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
 
   /api/orgs/{orgId}/projects/{projectId}/roles:
     get:
       tags: [Authorization]
       summary: Get roles
-      operationId: getRoles
       parameters:
         - $ref: '#/components/parameters/orgId'
         - $ref: '#/components/parameters/projectId'
       responses:
         '200':
           description: Roles list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
 
     post:
       tags: [Authorization]
       summary: Add role
-      operationId: addRole
       parameters:
         - $ref: '#/components/parameters/orgId'
         - $ref: '#/components/parameters/projectId'
@@ -229,33 +270,10 @@ paths:
       responses:
         '200':
           description: Role created
-
-  /api/orgs/{orgId}/projects/{projectId}/roles/{roleId}:
-    patch:
-      tags: [Authorization]
-      summary: Update role permissions
-      operationId: updateRolePermissions
-      parameters:
-        - $ref: '#/components/parameters/orgId'
-        - $ref: '#/components/parameters/projectId'
-        - $ref: '#/components/parameters/roleId'
-      requestBody:
-        $ref: '#/components/requestBodies/UpdatePermissions'
-      responses:
-        '200':
-          description: Role updated
-
-    delete:
-      tags: [Authorization]
-      summary: Delete role
-      operationId: deleteRole
-      parameters:
-        - $ref: '#/components/parameters/orgId'
-        - $ref: '#/components/parameters/projectId'
-        - $ref: '#/components/parameters/roleId'
-      responses:
-        '200':
-          description: Role deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
 
 components:
   parameters:
@@ -265,6 +283,7 @@ components:
       required: true
       schema:
         type: string
+        example: 64f1b2c3e4a5b6c7d8e9f001
 
     projectId:
       name: projectId
@@ -288,79 +307,87 @@ components:
         type: string
 
   schemas:
-    Register:
+    User:
       type: object
-      required: [name, email, password]
       properties:
+        _id:
+          type: string
         name:
           type: string
         email:
           type: string
           format: email
-        password:
+        email_verified:
+          type: boolean
+        auth_provider:
           type: string
+          enum: [local, google]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
 
-    Login:
+    Organization:
       type: object
-      required: [email, password]
       properties:
-        email:
+        _id:
           type: string
-          format: email
-        password:
-          type: string
-
-    CreateOrg:
-      type: object
-      required: [name]
-      properties:
         name:
           type: string
+        owner:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
 
-    UpdateOrgName:
+    Project:
       type: object
-      required: [name]
       properties:
+        _id:
+          type: string
         name:
           type: string
-
-    CreateProject:
-      type: object
-      required: [name]
-      properties:
-        name:
+        organization:
           type: string
-
-    AddMember:
-      type: object
-      required: [userId, roleId]
-      properties:
-        userId:
+        created_by:
           type: string
-        roleId:
+        createdAt:
           type: string
+          format: date-time
 
-    AddRole:
+    Role:
       type: object
-      required: [name, permissions]
       properties:
+        _id:
+          type: string
         name:
           type: string
         description:
           type: string
-        permissions:
-          type: array
-          items:
-            type: string
+        project:
+          type: string
 
-    UpdatePermissions:
+    Permission:
       type: object
-      required: [permissions]
       properties:
-        permissions:
-          type: array
-          items:
-            type: string
+        _id:
+          type: string
+        key:
+          type: string
+
+    Member:
+      type: object
+      properties:
+        _id:
+          type: string
+        user:
+          type: string
+        project:
+          type: string
+        role:
+          type: string
 
   requestBodies:
     Register:
@@ -368,53 +395,88 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Register'
+            type: object
+            required: [name, email, password]
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
 
     Login:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Login'
+            type: object
+            required: [email, password]
+            properties:
+              email:
+                type: string
+              password:
+                type: string
 
     CreateOrg:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CreateOrg'
+            type: object
+            required: [name]
+            properties:
+              name:
+                type: string
 
     UpdateOrgName:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/UpdateOrgName'
+            type: object
+            required: [name]
+            properties:
+              name:
+                type: string
 
     CreateProject:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CreateProject'
+            type: object
+            required: [name]
+            properties:
+              name:
+                type: string
 
     AddMember:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/AddMember'
+            type: object
+            required: [userId, roleId]
+            properties:
+              userId:
+                type: string
+              roleId:
+                type: string
 
     AddRole:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/AddRole'
-
-    UpdatePermissions:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdatePermissions'
+            type: object
+            required: [name, permissions]
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              permissions:
+                type: array
+                items:
+                  type: string
