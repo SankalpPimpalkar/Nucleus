@@ -1,0 +1,669 @@
+{
+  "info": {
+    "name": "nucleus",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/register",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Durgesh Prasad\",\n  \"email\": \"durgeshhh.in@gmail.com\",\n  \"password\": \"dgprasad\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/login",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sankalp.pimpalkar.dev@gmail.com\",\n  \"password\": \"sankalpana\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/me",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get User by Email",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth?email=sankalp.pimpalkar.dev@gmail.com",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "auth?email=sankalp.pimpalkar.dev@gmail.com"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "sankalp.pimpalkar.dev@gmail.com"
+                }
+              ],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "orgs",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                ""
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Nucleus\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "My Orgs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Org By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Update Org Name",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a02a1574a7c593ec4c0c",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a02a1574a7c593ec4c0c"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Nucleus By Sankalp\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Org",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a02a1574a7c593ec4c0c",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a02a1574a7c593ec4c0c"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Stagr\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Projects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Project By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects/6970a3b3b84e8579f954cc1f",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects",
+                "6970a3b3b84e8579f954cc1f"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects/6970a3b3b84e8579f954cc1f",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects",
+                "6970a3b3b84e8579f954cc1f"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "members",
+      "item": [
+        {
+          "name": "Add Member",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects/6970a3b3b84e8579f954cc1f/members",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects",
+                "6970a3b3b84e8579f954cc1f",
+                "members"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roleId\": \"6970a3b3b84e8579f954cc22\",\n  \"userId\": \"6970a4cfb84e8579f954cc45\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects/6970a3b3b84e8579f954cc1f/members",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects",
+                "6970a3b3b84e8579f954cc1f",
+                "members"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Delete By Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects/6970a3b3b84e8579f954cc1f/members/6970a4f5b84e8579f954cc4b",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects",
+                "6970a3b3b84e8579f954cc1f",
+                "members",
+                "6970a4f5b84e8579f954cc4b"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "authorization",
+      "item": [
+        {
+          "name": "Get Roles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects/6970a3b3b84e8579f954cc1f/roles",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects",
+                "6970a3b3b84e8579f954cc1f",
+                "roles"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Add Role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects/6970a3b3b84e8579f954cc1f/roles",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects",
+                "6970a3b3b84e8579f954cc1f",
+                "roles"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Intern\",\n  \"description\": \"SDE 1 - Intern\",\n  \"permissions\": [\n    \"organization:read\",\n    \"project:read\",\n    \"member:read\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update Permissions",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects/6970a3b3b84e8579f954cc1f/roles/6970a62fb84e8579f954cc56",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects",
+                "6970a3b3b84e8579f954cc1f",
+                "roles",
+                "6970a62fb84e8579f954cc56"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissions\": [\n    \"organization:read\",\n    \"project:read\",\n    \"member:read\",\n    \"authorization:read\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete By Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/api/orgs/6970a0dd1574a7c593ec4c14/projects/6970a3b3b84e8579f954cc1f/roles/6970a62fb84e8579f954cc56",
+              "protocol": "",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "orgs",
+                "6970a0dd1574a7c593ec4c14",
+                "projects",
+                "6970a3b3b84e8579f954cc1f",
+                "roles",
+                "6970a62fb84e8579f954cc56"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

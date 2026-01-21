@@ -1,0 +1,420 @@
+openapi: 3.0.0
+info:
+  title: Nucleus API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: Auth
+  - name: Organizations
+  - name: Projects
+  - name: Members
+  - name: Authorization
+
+paths:
+  /api/auth/register:
+    post:
+      tags: [Auth]
+      summary: Register user
+      operationId: registerUser
+      requestBody:
+        $ref: '#/components/requestBodies/Register'
+      responses:
+        '200':
+          description: User registered successfully
+
+  /api/auth/login:
+    post:
+      tags: [Auth]
+      summary: Login user
+      operationId: loginUser
+      requestBody:
+        $ref: '#/components/requestBodies/Login'
+      responses:
+        '200':
+          description: Login successful
+
+  /api/auth:
+    delete:
+      tags: [Auth]
+      summary: Logout user
+      operationId: logoutUser
+      responses:
+        '200':
+          description: Logout successful
+
+    get:
+      tags: [Auth]
+      summary: Get user by email
+      operationId: getUserByEmail
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+      responses:
+        '200':
+          description: User fetched successfully
+
+  /api/auth/me:
+    get:
+      tags: [Auth]
+      summary: Get current user
+      operationId: getCurrentUser
+      responses:
+        '200':
+          description: Current user info
+
+  /api/orgs:
+    post:
+      tags: [Organizations]
+      summary: Create organization
+      operationId: createOrganization
+      requestBody:
+        $ref: '#/components/requestBodies/CreateOrg'
+      responses:
+        '200':
+          description: Organization created
+
+    get:
+      tags: [Organizations]
+      summary: Get my organizations
+      operationId: getMyOrganizations
+      responses:
+        '200':
+          description: Organizations list
+
+  /api/orgs/{orgId}:
+    get:
+      tags: [Organizations]
+      summary: Get organization by ID
+      operationId: getOrganizationById
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+      responses:
+        '200':
+          description: Organization details
+
+    patch:
+      tags: [Organizations]
+      summary: Update organization name
+      operationId: updateOrganizationName
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateOrgName'
+      responses:
+        '200':
+          description: Organization updated
+
+    delete:
+      tags: [Organizations]
+      summary: Delete organization
+      operationId: deleteOrganization
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+      responses:
+        '200':
+          description: Organization deleted
+
+  /api/orgs/{orgId}/projects:
+    post:
+      tags: [Projects]
+      summary: Create project
+      operationId: createProject
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateProject'
+      responses:
+        '200':
+          description: Project created
+
+    get:
+      tags: [Projects]
+      summary: Get projects
+      operationId: getProjects
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+      responses:
+        '200':
+          description: Projects list
+
+  /api/orgs/{orgId}/projects/{projectId}:
+    get:
+      tags: [Projects]
+      summary: Get project by ID
+      operationId: getProjectById
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+        - $ref: '#/components/parameters/projectId'
+      responses:
+        '200':
+          description: Project details
+
+    delete:
+      tags: [Projects]
+      summary: Delete project
+      operationId: deleteProject
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+        - $ref: '#/components/parameters/projectId'
+      responses:
+        '200':
+          description: Project deleted
+
+  /api/orgs/{orgId}/projects/{projectId}/members:
+    post:
+      tags: [Members]
+      summary: Add member
+      operationId: addMember
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+        - $ref: '#/components/parameters/projectId'
+      requestBody:
+        $ref: '#/components/requestBodies/AddMember'
+      responses:
+        '200':
+          description: Member added
+
+    get:
+      tags: [Members]
+      summary: Get members
+      operationId: getMembers
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+        - $ref: '#/components/parameters/projectId'
+      responses:
+        '200':
+          description: Members list
+
+  /api/orgs/{orgId}/projects/{projectId}/members/{memberId}:
+    delete:
+      tags: [Members]
+      summary: Remove member
+      operationId: removeMember
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/memberId'
+      responses:
+        '200':
+          description: Member removed
+
+  /api/orgs/{orgId}/projects/{projectId}/roles:
+    get:
+      tags: [Authorization]
+      summary: Get roles
+      operationId: getRoles
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+        - $ref: '#/components/parameters/projectId'
+      responses:
+        '200':
+          description: Roles list
+
+    post:
+      tags: [Authorization]
+      summary: Add role
+      operationId: addRole
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+        - $ref: '#/components/parameters/projectId'
+      requestBody:
+        $ref: '#/components/requestBodies/AddRole'
+      responses:
+        '200':
+          description: Role created
+
+  /api/orgs/{orgId}/projects/{projectId}/roles/{roleId}:
+    patch:
+      tags: [Authorization]
+      summary: Update role permissions
+      operationId: updateRolePermissions
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/roleId'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdatePermissions'
+      responses:
+        '200':
+          description: Role updated
+
+    delete:
+      tags: [Authorization]
+      summary: Delete role
+      operationId: deleteRole
+      parameters:
+        - $ref: '#/components/parameters/orgId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/roleId'
+      responses:
+        '200':
+          description: Role deleted
+
+components:
+  parameters:
+    orgId:
+      name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+
+    projectId:
+      name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+
+    memberId:
+      name: memberId
+      in: path
+      required: true
+      schema:
+        type: string
+
+    roleId:
+      name: roleId
+      in: path
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    Register:
+      type: object
+      required: [name, email, password]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    Login:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    CreateOrg:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+
+    UpdateOrgName:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+
+    CreateProject:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+
+    AddMember:
+      type: object
+      required: [userId, roleId]
+      properties:
+        userId:
+          type: string
+        roleId:
+          type: string
+
+    AddRole:
+      type: object
+      required: [name, permissions]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+
+    UpdatePermissions:
+      type: object
+      required: [permissions]
+      properties:
+        permissions:
+          type: array
+          items:
+            type: string
+
+  requestBodies:
+    Register:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Register'
+
+    Login:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Login'
+
+    CreateOrg:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateOrg'
+
+    UpdateOrgName:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateOrgName'
+
+    CreateProject:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateProject'
+
+    AddMember:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddMember'
+
+    AddRole:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddRole'
+
+    UpdatePermissions:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdatePermissions'

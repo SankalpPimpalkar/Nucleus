@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { OrganizationController } from "./organization.controller.js";
 import authenticate from "../../shared/middlewares/authenticate.js";
-import authorize from "../../shared/middlewares/authorize.js";
-import { PERMISSIONS } from "../authorization/constants/authorization.permissions.js";
+import projectRouter from "../projects/project.routes.js";
 
 const organizationRouter = Router()
 
@@ -31,5 +30,7 @@ organizationRouter.delete(
     authenticate,
     OrganizationController.deleteOrg
 )
+
+organizationRouter.use('/:orgId/projects', projectRouter)
 
 export default organizationRouter
