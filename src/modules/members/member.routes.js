@@ -4,22 +4,22 @@ import { PERMISSIONS } from "../authorization/constants/authorization.permission
 import { MemberController } from "./member.controller.js";
 import { Router } from "express";
 
-const memberRouter = Router()
+const memberRouter = Router({ mergeParams: true })
 
 memberRouter.post(
-    '/projects/:projectId',
+    '/',
     authenticate,
     authorize([PERMISSIONS.MEMBER_ADD]),
     MemberController.addMember
 )
 memberRouter.get(
-    '/projects/:projectId',
+    '/',
     authenticate,
     authorize([PERMISSIONS.MEMBER_READ]),
     MemberController.getMembers
 )
 memberRouter.delete(
-    '/:memberId/projects/:projectId',
+    '/:memberId',
     authenticate,
     authorize([PERMISSIONS.MEMBER_REMOVE]),
     MemberController.removeMember

@@ -34,9 +34,9 @@ export class MemberController {
 
     static async removeMember(req, res, next) {
         try {
-            const { memberId } = req.params
+            const { memberId, projectId } = req.params
 
-            await MemberService.removeMember(memberId)
+            await MemberService.removeMember(memberId, projectId)
 
             return res
                 .status(200)

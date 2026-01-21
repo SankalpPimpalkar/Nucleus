@@ -4,7 +4,7 @@ import PermissionModel from "../modules/authorization/models/permission.model.js
 
 async function seedPermissions() {
     try {
-        dbconnect()
+        await dbconnect()
 
         const permissions = Object.values(PERMISSIONS);
 

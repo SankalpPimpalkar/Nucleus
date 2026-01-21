@@ -4,31 +4,31 @@ import authenticate from "../../shared/middlewares/authenticate.js";
 import authorize from "../../shared/middlewares/authorize.js";
 import { PERMISSIONS } from "./constants/authorization.permissions.js";
 
-const authorizationRouter = Router()
+const roleRouter = Router({ mergeParams: true })
 
-authorizationRouter.post(
-    '/projects/:projectId',
+roleRouter.post(
+    '/',
     authenticate,
     authorize([PERMISSIONS.ROLE_CREATE]),
     AuthorizationController.createRole
 )
-authorizationRouter.get(
-    '/projects/:projectId',
+roleRouter.get(
+    '/',
     authenticate,
     authorize([PERMISSIONS.ROLE_READ]),
     AuthorizationController.getRoles
 )
-authorizationRouter.patch(
-    '/:roleId/projects/:projectId',
+roleRouter.patch(
+    '/:roleId',
     authenticate,
     authorize([PERMISSIONS.ROLE_UPDATE]),
     AuthorizationController.updateRolePermissions
 )
-authorizationRouter.delete(
-    '/:roleId/projects/:projectId',
+roleRouter.delete(
+    '/:roleId',
     authenticate,
     authorize([PERMISSIONS.ROLE_DELETE]),
     AuthorizationController.deleteRole
 )
 
-export default authorizationRouter
+export default roleRouter

@@ -18,5 +18,7 @@ const memberSchema = new mongoose.Schema({
     },
 }, { timestamps: true })
 
+memberSchema.index({ user: 1, project: 1 }, { unique: true })
+
 const MemberModel = mongoose.model('Membership', memberSchema)
 export default MemberModel

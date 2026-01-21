@@ -3,6 +3,8 @@ import authenticate from "../../shared/middlewares/authenticate.js";
 import { ProjectController } from "./project.controller.js";
 import authorize from "../../shared/middlewares/authorize.js";
 import { PERMISSIONS } from "../authorization/constants/authorization.permissions.js";
+import roleRouter from "../authorization/authorization.routes.js";
+import memberRouter from "../members/member.routes.js";
 
 const projectRouter = Router()
 
@@ -34,5 +36,8 @@ projectRouter.delete(
     authorize([PERMISSIONS.PROJECT_DELETE]),
     ProjectController.deleteProject
 )
+
+projectRouter.use('/:projectId/members', memberRouter)
+projectRouter.use('/:projectId/roles', roleRouter)
 
 export default projectRouter
