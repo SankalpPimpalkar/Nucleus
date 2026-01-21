@@ -16,6 +16,21 @@ export class AuthorizationController {
         }
     }
 
+    static async getRoles(req, res, next) {
+        try {
+            const { projectId } = req.params
+
+            const roles = await AuthorizationService.getProjectRoles(projectId)
+
+            return res
+                .status(201)
+                .json({ roles })
+
+        } catch (error) {
+            next(error)
+        }
+    }
+
     static async updateRolePermissions(req, res, next) {
         try {
             const { roleId } = req.params

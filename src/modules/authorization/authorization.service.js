@@ -77,6 +77,11 @@ export class AuthorizationService {
         }
     }
 
+    static async getProjectRoles(projectId) {
+        const roles = await RoleModel.find({ project: projectId }).select("name")
+        return roles
+    }
+
     static async updatePermissions(roleId, permissionKeys = []) {
         const role = await RoleModel.findById(roleId);
 
