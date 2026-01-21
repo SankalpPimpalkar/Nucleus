@@ -84,7 +84,7 @@ export class ProjectService {
         const project = await ProjectModel
             .findById(projectId)
             .populate("organization");
-
+        
         if (!project) {
             throw new NotFoundError("Project not found");
         }

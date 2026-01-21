@@ -1,5 +1,5 @@
 import OrganizationModel from "./organization.model.js";
-import { NotFoundError, UnauthorizedError } from "../../shared/errors/types";
+import { NotFoundError, UnauthorizedError } from "../../shared/errors/types.js";
 
 export class OrganizationService {
     static #validateOwner(owner, org) {

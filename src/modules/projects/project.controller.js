@@ -75,6 +75,8 @@ export class ProjectController {
             const { projectId } = req.params;
             const userId = req.user;
 
+            console.log(req.params)
+
             await ProjectService.deleteProject(
                 projectId,
                 userId
