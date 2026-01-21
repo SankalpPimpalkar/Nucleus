@@ -6,15 +6,15 @@ import { PERMISSIONS } from "../authorization/constants/authorization.permission
 import roleRouter from "../authorization/authorization.routes.js";
 import memberRouter from "../members/member.routes.js";
 
-const projectRouter = Router()
+const projectRouter = Router({ mergeParams: true })
 
 projectRouter.post(
-    '/orgs/:orgId',
+    '/',
     authenticate,
     ProjectController.createProject
 )
 projectRouter.get(
-    '/orgs/:orgId',
+    '/',
     authenticate,
     ProjectController.getProjectsByOrg
 )

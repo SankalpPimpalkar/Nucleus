@@ -102,10 +102,13 @@ export class AuthorizationService {
         rolePermissions.permissions = permissions;
         await rolePermissions.save();
 
-        return await rolePermissions
+        const result = await RolePermissionModel
+            .findById(rolePermissions.id)
             .populate("role", "name description")
             .populate("permissions", "key")
             .select("-project");
+
+        return result
     }
 
     static async deleteRole(roleId) {
