@@ -11,7 +11,7 @@ import "./modules/authorization/authorization.listener.js"
 const app = express()
 
 // Middlewares
-app.use('/docs', express.static('docs'))
+app.use('/public', express.static('public'))
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -22,7 +22,7 @@ app.use(cookieParser())
 app.use(
     '/',
     apiReference({
-        url: '/docs/nucleus.yaml',
+        url: '/public/nucleus.yaml',
     }),
 )
 
